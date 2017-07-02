@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"> <!--ng-app: give angular a base code of where to start-->
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS Welcome!</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+</head>
+
+<body ng-app="">
+Your Name: <input type="text" ng-model="name"><br>
+Welcome {{ name | uppercase }} <br> <!--uppercase filter to convert text to uppercase-->
+Welcome {{ name | lowercase }} <br>
+
+Currency: <input type="text" ng-model="price"><br>
+Welcome {{ price | currency:"Rs. ":5 }} <br>
+Welcome {{ price | number:4 }} <!--4,5 is for decimal places-->
+
+<hr><!------------------------------------------------------------>
+
+	<!--ng-include: split all coding instead of coding in 1 file, help to organize into different files-->
+
+	<div ng-include="'dummyfile.html'">
+	</div>
+	
+<hr><!------------------------------------------------------------>
+	<!--Route is a way to handler different URL context in your website-->
+	
+</body>
+
+</html>
