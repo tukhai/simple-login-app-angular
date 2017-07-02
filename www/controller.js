@@ -18,6 +18,13 @@ app.config(function($routeProvider){ /*just like the $scope example, not compres
 		/*template: '<b>This is template</b>'*/ /*the order is not important, always show to template*/
 	})
 	.when('/dashboard', {
+		resolve: {  /*conditional routing, only be redirect to dashboard if username and password have correct value*/
+			"check": function($location, $rootScope){
+				if(!$rootScope.loggedIn){
+					$location.path('/');
+				} 
+			}
+		},
 		templateUrl: 'dashboard.html'
 	})
 	.otherwise({
@@ -26,11 +33,13 @@ app.config(function($routeProvider){ /*just like the $scope example, not compres
 	
 });
 
-app.controller('loginCtrl', function($scope, $location){
+app.controller('loginCtrl', function($scope, $location, $rootScope){
 	$scope.submit = function() {
-		var uname = $scope.username;
-		var password = $scope.password;
+		//$rootScope.uname = $scope.username; /*$rootScope make them accessible everywhere*/
+		//$rootScope.password = $scope.password;
 		if($scope.username == 'admin' && $scope.password == 'admin'){
+			$rootScope.loggedIn = true; /*all security logic lies here*/
+			
 			/*window.location.hash = '#/dashboard'; the 2 command are similar*/
 			$location.path('/dashboard'); /*hash is to prevent the base from loading*/
 		} else {
